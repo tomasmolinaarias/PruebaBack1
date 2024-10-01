@@ -1,0 +1,47 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static 'style/experiencia.css' %}" />
+    <title>{{ title }}</title>
+  </head>
+  <body>
+    <header class="header">
+      <div class="container">
+        <h1>{{ name }}</h1>
+        <p class="role">{{ description }}</p>
+        <div class="social-links">
+          <a href="{{ linkedin }}" target="_blank">LinkedIn</a> |
+          <a href="{{ github }}" target="_blank">GitHub</a>
+        </div>
+      </div>
+    </header>
+    <nav class="navbar">
+      <ul>
+        <li><a href="{% url 'index' %}">Inicio</a></li>
+        <li><a href="{% url 'experiencia' %}">Experiencia</a></li>
+        <li><a href="{% url 'contact' %}">Contacto</a></li>
+      </ul>
+    </nav>
+    <main class="main-content">
+      <div class="container">
+        <h2>Mi Experiencia</h2>
+        {% for exp in experiences %}
+        <div class="experience-item">
+          <h3>{{ exp.role }} en {{ exp.company }}</h3>
+          <p class="experience-period"><em>{{ exp.period }}</em></p>
+          <p>{{ exp.description }}</p>
+          <p><strong>Habilidades:</strong> {{ exp.skills|join:", " }}</p>
+        </div>
+        {% endfor %}
+      </div>
+    </main>
+    <footer class="footer">
+      <div class="container">
+        <p>&copy; 2024 {{ name }}</p>
+      </div>
+    </footer>
+  </body>
+</html>
